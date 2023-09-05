@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', function () {return view('welcome');});
+
+// Route::get('/consult-books','App\Http\Controllers\ConsultaApiController@ConsultaLivros')->name('consult-books');
+
+
