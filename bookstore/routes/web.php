@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {return view('welcome');});
+Route::get('/', function () {return view('home');});
 
-// Route::get('/consult-books','App\Http\Controllers\ConsultaApiController@ConsultaLivros')->name('consult-books');
+Route::get('/lista-livros-home/{livro?}','HomeController@ListaLivrosHome')->name('lista-livros-home');
 
 
