@@ -228,6 +228,12 @@
                         <span class="service-icon"><i class="material-icons">search</i></span>
                         <img src="imagem-servico-1.jpg" alt="Serviço 1" class="service-image">
                         <p class="light">Consultar Endereço de CEP para Entrega</p>
+                        <form action="{{ route('consultar-cep') }}" method="POST">
+                            @csrf
+                            <input type="text" name="cep" placeholder="Digite o CEP">
+                            <button type="submit" class="btn waves-effect waves-light">Consultar</button>
+                        </form>
+                        <div id="resultado-cep"></div>
                     </div>
                 </div>
                 <div class="col s12 m4">
