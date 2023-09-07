@@ -27,18 +27,24 @@ class ConsultaLivrosService extends Model
     public function Processar()
     {
 
-        $query = 'livros';
+
+        $categories = ['romance', 'terror'];
         $lista = [];
 
         $client = new Client();
-        $response = $client->get("https://openlibrary.org/search.json?q={$query}");
 
-        $data = json_decode($response->getBody());
+        foreach ($categories as $category) {
+            $query = urlencode("subject:\"$category\"");
+            $response = $client->get("https://openlibrary.org/search.json?q={$query}");
 
-        foreach ($data->docs as $book) {
-            $lista[] = new ConsultaLivrosS($book);
+            $data = json_decode($response->getBody());
+
+            foreach ($data->docs as $book) {
+                if (isset($book->cover_i) && $book->cover_i !== null) {
+                    $lista[] = new ConsultaLivrosS($book);
+                }
+            }
         }
-
 
         $this->saida = $lista;
 

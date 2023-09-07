@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Services\ConsultaLivrosService;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,8 +15,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {return view('home');});
+Route::get('/', function () {
+    $consultaLivrosService = new ConsultaLivrosService();
+    $consultaLivrosService->Processar();
+    $dados = $consultaLivrosService->saida;
 
-Route::get('/lista-livros-home/{livro?}','HomeController@ListaLivrosHome')->name('lista-livros-home');
+    return view('home', compact('dados'));
+});
 
+
+Route::get('/sobre-nos', function () {
+    $consultaLivrosService = new ConsultaLivrosService();
+    $consultaLivrosService->Processar();
+    $dados = $consultaLivrosService->saida;
+
+    return view('sobre-nos', compact('dados'));
+});
 
