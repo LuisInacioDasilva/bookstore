@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\Services\ConsultaLivrosService;
+// use App\Models\Services\ConsultaLivrosService;
 
 
 /*
@@ -15,20 +15,9 @@ use App\Models\Services\ConsultaLivrosService;
 |
 */
 
-Route::get('/', function () {
-    $consultaLivrosService = new ConsultaLivrosService();
-    $consultaLivrosService->Processar();
-    $dados = $consultaLivrosService->saida;
+Route::get('/', 'HomeController@ListaLivrosHome')->name('home');
 
-    return view('home', compact('dados'));
-});
+Route::get('/sobre-nos', function () { return view('sobre-nos');})->name('sobre-nos');
 
 
-Route::get('/sobre-nos', function () {
-    $consultaLivrosService = new ConsultaLivrosService();
-    $consultaLivrosService->Processar();
-    $dados = $consultaLivrosService->saida;
-
-    return view('sobre-nos', compact('dados'));
-});
 

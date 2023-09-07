@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Entradas\ConsultaLivrosE;
-use App\Models\Entradas\ListaLivroHomeE;
 use App\Models\Services\ConsultaLivrosService;
-use App\Models\Services\ListaLivroHomeService;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -14,12 +11,11 @@ class HomeController extends Controller
     {
         try {
 
-            $processador = new ListaLivroHomeService( new ListaLivroHomeE($request));
+            $processador = new ConsultaLivrosService();
             $processador->Processar();
+            $dados = $processador->saida;
 
-            return response()
-                ->json($processador->saida)
-                ->setStatusCode(200);
+            return view('home', compact('dados'));
         } catch (\Exception $ex) {
             return $this->retornarExceptionGenetica($ex);
         }
