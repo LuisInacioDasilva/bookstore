@@ -91,11 +91,6 @@
             border-radius: 10px;
         }
 
-        .book-card p {
-            margin-bottom: 10px;
-            text-align: left;
-        }
-
         /* Estilo para o texto "Sobre Nós" */
         .about-text {
             background-color: #fff;
@@ -136,6 +131,7 @@
 
             .book-card {
                 padding: 10px;
+                margin: 10px;
             }
 
             .section-title {
@@ -182,6 +178,108 @@
         .dark-mode-button.dark-mode {
             background-color: #333;
         }
+
+        /* Estilo para a seção de informações do livro */
+        #book-info {
+            background-color: #f5f5f5;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        #book-info .book-card {
+            background-color: #fff;
+            /* Cor de fundo branca para os cards */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+        }
+
+        #book-info .book-card img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        #book-info .book-details {
+            margin-top: 20px;
+        }
+
+        #book-info .book-title {
+            font-size: 24px;
+            color: #009688;
+            margin-bottom: 10px;
+        }
+
+        #book-info .book-authors {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        #book-info .book-description {
+            font-size: 16px;
+            color: #333;
+        }
+
+        #book-info .book-details p {
+            font-size: 16px;
+            color: #333;
+            margin: 5px 0;
+        }
+
+        .btn-contact {
+            display: inline-block;
+            padding: 12px 24px;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            border: 1px solid transparent;
+            font-size: 1rem;
+            line-height: 0.6;
+            /* Ajuste a altura da linha para 1 (padrão) */
+            border-radius: 0.25rem;
+            transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+
+        .btn-contact:hover {
+            background-color: #00796b;
+        }
+
+        /* Estilos para dispositivos móveis (celulares) */
+        @media (max-width: 600px) {
+            header .brand-logo {
+                font-size: 20px;
+            }
+
+            header ul.right a {
+                font-size: 14px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .book-card {
+                padding: 10px;
+                margin: 10px 0;
+            }
+
+            #book-info .book-card {
+                padding: 10px;
+            }
+
+            .dark-mode-button {
+                top: 60px;
+                right: 10px;
+                width: 30px;
+                height: 30px;
+                font-size: 16px;
+            }
+        }
     </style>
 </head>
 
@@ -208,39 +306,28 @@
         </div>
     </header>
 
-    <!-- Seção de apresentação -->
-    <section id="presentation" class="center-align py-5" data-aos="fade-up">
-        <h2 class="flow-text">Bem-vindo à Minha Livraria Online!</h2>
-        <p class="flow-text">Explore nossa coleção de livros e mergulhe em aventuras literárias incríveis. Encontre o
-            próximo livro que irá cativar sua imaginação.</p>
-    </section>
-
-    <!-- Seção de livros em destaque -->
-    <section id="books" class="py-5">
-        <div class="container">
-            <h2 class="center-align section-title">Livros em Destaque</h2>
-
-            <!-- Catálogo de Livros em Destaque -->
-            <div class="row" {{ shuffle($dados) }}>
-                @foreach ($dados as $item)
-                    @if (!empty($item->titulo))
-                        <!-- Verifique se o título não está vazio -->
-                        <div class="col s12 m4">
-                            <div class="book-card" data-aos="fade-up">
-                                <a href="http://127.0.0.1:8000/busca-livro/{{ $item->id_livro }}">
-                                    <!-- Adicione um link para a página de detalhes do livro -->
-                                    <img src="{{ $item->imagem }}" width="250px" height="315px"
-                                        alt="{{ $item->titulo }}">
-                                    <h5>{{ $item->titulo }}</h5>
-                                </a>
-                                <p>Autor:
-                                    {{ mb_substr($item->autores, 0, 20) }}{{ strlen($item->autores) > 20 ? '...' : '' }}
-                                </p>
-                                <p>Descrição: {{ $item->descricao }}</p>
-                            </div>
-                        </div>
-                    @endif
-                @endforeach
+    <!-- Seção de informações do livro -->
+    <section id="book-info" class="container" data-aos="fade-up">
+        <div class="row">
+            <div class="col s12">
+                <h2 class="section-title center-align" style="margin-top: 2px; border-bottom: 2px solid #009688;">
+                    Detalhes do Livro</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m6 offset-m3">
+                <div class="book-card center-align">
+                    <img src="{{ $dados->imagem }}" alt="Nome do Livro">
+                    <h3 class="book-title">{{ $dados->titulo }}</h3>
+                    <p class="book-authors">Autor(es): {{ $dados->autor }}</p>
+                    <p class="book-description">
+                        {{ isset($dados->descricao_livro) ? (strlen($dados->descricao_livro) > 150 ? substr($dados->descricao_livro, 0, 145) . '...' : $dados->descricao_livro) : 'Descrição Indisponível' }}
+                    </p>
+                    <p><strong>Data de Publicação:</strong> {{ isset($dados->data_publicacao) ? 'Sem informações de data' : $dados->data_publicacao }}</p>
+                    <p><strong>Categorias:</strong> {{ strlen($dados->assuntos) > 158 ? substr($dados->assuntos, 0, 145) . '...' : $dados->assuntos }}</p>
+                    <a href="#contact" class="btn waves-effect waves-light btn-contact center-align">Entrar em
+                        Contato</a>
+                </div>
             </div>
         </div>
     </section>
@@ -268,7 +355,6 @@
     <!-- Inclua a biblioteca AOS JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
-        // Inicialize os componentes do Materialize
         document.addEventListener('DOMContentLoaded', function() {
             M.AutoInit();
 
@@ -280,7 +366,6 @@
                 body.classList.toggle('dark-mode');
                 toggleDarkModeButton.classList.toggle('active');
                 darkModeButton.classList.toggle('dark-mode');
-                // Altere o ícone com base no modo
                 const icon = darkModeButton.querySelector('i');
                 if (body.classList.contains('dark-mode')) {
                     icon.classList.remove('fa-sun');
@@ -295,7 +380,6 @@
             darkModeButton.addEventListener('click', toggleDarkMode);
         });
 
-        // Inicialize as animações AOS
         AOS.init({
             duration: 700,
             easing: 'ease-in-out',

@@ -17,9 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@ListaLivrosHome')->name('home');
 
-Route::post('/consultar-cep', 'HomeController@ConsultaCep')->name('consultar-cep');
+Route::get('/busca-livro/{id_livro}', 'HomeController@getBuscaLivro')->name('busca-livro');
+
 
 Route::get('/sobre-nos', function () { return view('sobre-nos');})->name('sobre-nos');
-
-
-

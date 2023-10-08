@@ -2,10 +2,11 @@
 
 namespace App\Models\Entradas;
 
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
-class ConsultaCepLivroE extends Model
+class BuscaLivroE extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -18,7 +19,7 @@ class ConsultaCepLivroE extends Model
 
     public function __construct(Request $entrada)
     {
-        $this->cep              = trim($entrada->cep);
+        $this->id_livro              = trim($entrada->id_livro);
 
     }
 }

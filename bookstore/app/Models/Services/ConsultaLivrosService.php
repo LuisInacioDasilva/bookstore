@@ -2,7 +2,6 @@
 
 namespace App\Models\Services;
 
-use App\Models\Entradas\ConsultaLivrosE;
 use App\Models\Saidas\ConsultaLivrosS;
 use Illuminate\Database\Eloquent\Model;
 use GuzzleHttp\Client;
@@ -46,7 +45,7 @@ class ConsultaLivrosService extends Model
             }
         }
 
-        $this->saida = $lista;
+         $this->saida = $lista;
 
     }
 }

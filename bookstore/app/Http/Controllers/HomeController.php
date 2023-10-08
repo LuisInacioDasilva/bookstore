@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Entradas\ConsultaCepLivroE;
-use App\Models\Services\ConsultaCepLivroService;
+
+use App\Models\Entradas\BuscaLivroE;
+use App\Models\Services\BuscaLivroService;
+
 use App\Models\Services\ConsultaLivrosService;
 use Illuminate\Http\Request;
 
@@ -24,16 +26,18 @@ class HomeController extends Controller
     }
 
 
-    public function ConsultaCep(Request $request)
+    public function getBuscaLivro(Request $request)
     {
 
         try {
 
-            $processador = new ConsultaCepLivroService(new ConsultaCepLivroE($request));
+            $processador = new BuscaLivroService(new BuscaLivroE($request));
             $processador->Processar();
-            return $processador->saida;
-        } catch (\Exception $ex) {
-            return "Cep não encontrado";
-        }
+            $dados = $processador->saida;
+
+            return view('info-livro', compact('dados'));
+         } catch (\Exception $ex) {
+             return $ex;
+         }
     }
 }

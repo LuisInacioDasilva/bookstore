@@ -23,6 +23,7 @@ class ConsultaLivrosS extends Model
         $this->autores      = isset($saida->author_name) ? implode(', ', $saida->author_name) : 'Autor não disponível';
         $this->descricao    = isset($saida->description) ? (strlen($saida->description) > 20 ? substr($saida->description, 0, 20) . '...' : $saida->description) : 'Descrição não disponível';
         $this->imagem       = isset($saida->cover_i) ? "https://covers.openlibrary.org/b/id/{$saida->cover_i}-M.jpg" : 'Imagem não disponível';
+        $this->id_livro     = trim(str_replace("/works/", '', $saida->key));
 
     }
 }
