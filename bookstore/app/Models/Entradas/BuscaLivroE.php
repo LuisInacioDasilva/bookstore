@@ -22,4 +22,5 @@ class BuscaLivroE extends Model
         $this->id_livro              = trim($entrada->id_livro);
 
     }
+
 }

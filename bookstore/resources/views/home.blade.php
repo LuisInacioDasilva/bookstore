@@ -32,28 +32,6 @@
             /* Texto branco */
         }
 
-        /* Estilo para o cabeçalho */
-        header .nav-wrapper {
-            background-color: #009688;
-            /* Cor de fundo verde esmeralda */
-        }
-
-        header .brand-logo {
-            font-size: 28px;
-            /* Tamanho do título maior */
-            color: #fff;
-            /* Cor branca para o texto do título */
-        }
-
-        header ul.right a {
-            font-size: 18px;
-            color: #fff;
-        }
-
-        header ul.right a:hover {
-            background-color: #00796b;
-            /* Cor mais escura ao passar o mouse */
-        }
 
         /* Estilo para os títulos das seções */
         .section-title {
@@ -109,30 +87,10 @@
             animation: fadeIn 2s;
         }
 
-        /* Estilo para o rodapé */
-        footer {
-            background-color: #009688;
-            padding: 20px 0;
-        }
-
-        footer p {
-            margin: 0;
-            font-size: 18px;
-            color: #fff;
-            animation: fadeIn 2s;
-        }
 
         /* Estilos responsivos */
         @media (max-width: 992px) {
-            header .brand-logo {
-                font-size: 24px;
-                /* Tamanho menor para telas menores */
-            }
 
-            header ul.right a {
-                font-size: 16px;
-                /* Tamanho menor para telas menores */
-            }
 
             .book-card {
                 padding: 10px;
@@ -142,71 +100,12 @@
                 font-size: 28px;
             }
         }
-
-        /* Estilo para o ícone de lua/sol */
-        .icon-container {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            cursor: pointer;
-            font-size: 24px;
-            transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
-        }
-
-        /* Animação para o ícone de lua/sol */
-        .icon-container.active {
-            transform: rotate(180deg);
-        }
-
-        /* Estilo para o botão de alternância do modo noturno */
-        .dark-mode-button {
-            position: fixed;
-            top: 80px;
-            right: 20px;
-            padding-top: 30px;
-            background-color: #009688;
-            color: #fff;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            transition: background-color 0.3s ease-in-out;
-        }
-
-        /* Estilo para o botão de alternância do modo noturno no modo noturno */
-        .dark-mode-button.dark-mode {
-            background-color: #333;
-        }
     </style>
 </head>
 
 <body>
     <!-- Cabeçalho -->
-    <header>
-        <div class="navbar-fixed">
-            <nav class="nav-wrapper">
-                <div class="container">
-                    <a href="http://localhost:8000/" class="brand-logo">
-                        <i class="material-icons left">book</i> Minha Livraria Online
-                    </a>
-                    <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li><a href="http://localhost:8000/">Início</a></li>
-                        <li><a href="http://localhost:8000/sobre-nos">Sobre Nós</a></li>
-                        <li><a href="#books">Livros</a></li>
-                        <li class="dark-mode-link">
-                            <a href="#contact">Contato</a>
-                            <button class="dark-mode-button"><i class="fas fa-sun"></i></button>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </header>
+    @include('includes.header')
 
     <!-- Seção de apresentação -->
     <section id="presentation" class="center-align py-5" data-aos="fade-up">
@@ -246,62 +145,11 @@
     </section>
 
     <!-- Rodapé -->
-    <footer id="contact" class="teal white-text center-align py-5" data-aos="fade-up">
-        <div class="container">
-            <p>&copy; 2023 Minha Livraria Online</p>
-            <p>Entre em contato conosco para descobrir mais sobre nossa vasta coleção de livros e serviços exclusivos.
-                Estamos aqui para ajudá-lo a encontrar as melhores obras literárias e tornar sua experiência de leitura
-                incrível.</p>
-        </div>
-    </footer>
+    @include('includes.footer')
 
     <!-- Botão de alternância do modo noturno (ícone de lua/sol) -->
-    <div id="dark-mode-toggle" class="icon-container">
-        <i class="fas fa-sun"></i>
-    </div>
+    @include('includes.button-mode')
 
-    <!-- Botão de alternância do modo noturno -->
-    <button class="dark-mode-button"><i class="fas fa-sun"></i></button>
-
-    <!-- Inclua a biblioteca Materialize JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <!-- Inclua a biblioteca AOS JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script>
-        // Inicialize os componentes do Materialize
-        document.addEventListener('DOMContentLoaded', function() {
-            M.AutoInit();
-
-            const toggleDarkModeButton = document.getElementById('dark-mode-toggle');
-            const darkModeButton = document.querySelector('.dark-mode-button');
-            const body = document.body;
-
-            function toggleDarkMode() {
-                body.classList.toggle('dark-mode');
-                toggleDarkModeButton.classList.toggle('active');
-                darkModeButton.classList.toggle('dark-mode');
-                // Altere o ícone com base no modo
-                const icon = darkModeButton.querySelector('i');
-                if (body.classList.contains('dark-mode')) {
-                    icon.classList.remove('fa-sun');
-                    icon.classList.add('fa-moon');
-                } else {
-                    icon.classList.remove('fa-moon');
-                    icon.classList.add('fa-sun');
-                }
-            }
-
-            toggleDarkModeButton.addEventListener('click', toggleDarkMode);
-            darkModeButton.addEventListener('click', toggleDarkMode);
-        });
-
-        // Inicialize as animações AOS
-        AOS.init({
-            duration: 700,
-            easing: 'ease-in-out',
-            once: true,
-        });
-    </script>
 </body>
 
 </html>
