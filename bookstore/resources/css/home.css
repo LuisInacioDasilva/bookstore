@@ -1,0 +1,85 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    /* Fundo mais claro */
+    color: #333;
+    /* Cor de texto mais escura */
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+/* Modo Noturno */
+body.dark-mode {
+    background-color: #333;
+    /* Fundo escuro */
+    color: #fff;
+    /* Texto branco */
+}
+
+
+/* Estilo para os títulos das seções */
+.section-title {
+    font-size: 36px;
+    font-weight: bold;
+    color: #009688;
+    /* Cor verde esmeralda para os títulos das seções */
+}
+
+/* Estilo para os cards de livros */
+.book-card {
+    background-color: #fff;
+    /* Cor de fundo branca para os cards */
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+/* Modo Noturno - Altere a cor de fundo dos cards */
+body.dark-mode .book-card {
+    background-color: #444;
+    /* Cor de fundo cinza escuro no modo noturno */
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.book-card img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.book-card p {
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+/* Estilo para o texto "Sobre Nós" */
+.about-text {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: justify;
+    border: 2px solid #009688;
+    /* Cor verde esmeralda para a borda */
+    color: #333;
+    margin: 30px 20px;
+    animation: fadeIn 2s;
+}
+
+
+/* Estilos responsivos */
+@media (max-width: 992px) {
+
+
+    .book-card {
+        padding: 10px;
+    }
+
+    .section-title {
+        font-size: 28px;
+    }
+}
