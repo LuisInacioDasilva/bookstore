@@ -1,17 +1,5 @@
-<style>
-    /* Estilo para o rodapé */
-    footer {
-        background-color: #009688;
-        padding: 20px 0;
-    }
+<link rel="stylesheet" href="{{ asset('css/footer.css') }}">
 
-    footer p {
-        margin: 0;
-        font-size: 18px;
-        color: #fff;
-        animation: fadeIn 2s;
-    }
-</style>
 
 <footer id="contact" class="teal white-text center-align py-5" data-aos="fade-up">
     <div class="container">

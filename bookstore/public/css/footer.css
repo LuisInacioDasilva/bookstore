@@ -1,0 +1,12 @@
+   /* Estilo para o rodapé */
+   footer {
+    background-color: #009688;
+    padding: 20px 0;
+}
+
+footer p {
+    margin: 0;
+    font-size: 18px;
+    color: #fff;
+    animation: fadeIn 2s;
+}

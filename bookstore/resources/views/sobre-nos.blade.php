@@ -1,302 +1,127 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <title>Sobre Nós</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <style>
         body {
-            background-color: #121212;
-            font-family: 'Arial', sans-serif;
-            color: #fff;
+            background-color: #f0f0f0;
+            /* Cor de fundo suave */
         }
 
-        /* Estilo para o cabeçalho */
-        header .nav-wrapper {
-            background-color: #ff7043;
+        .header {
+            font-size: 36px;
+            margin: 30px 0;
+            animation: fadeInUp 1s ease-in-out;
         }
 
-        header .brand-logo {
-            font-size: 24px;
-            color: #fff;
-        }
-
-        header ul.right a {
-            font-size: 18px;
-            color: #fff;
-        }
-
-        /* Estilo para os links no cabeçalho quando hover */
-        header ul.right a:hover {
-            background-color: #1e1e1e;
-        }
-
-        /* Estilos para as seções de conteúdo */
         .section {
-            padding: 40px 0;
-        }
-
-        .card {
-            background-color: #1e1e1e;
-            color: #fff;
-        }
-
-        .card-title {
-            color: #ff7043;
-        }
-
-        .icon-block {
-            text-align: center;
-            padding: 20px;
-        }
-
-        .icon-block h4 {
-            font-size: 24px;
-        }
-
-        /* Estilo para o footer */
-        footer {
-            background-color: #ff7043;
-            color: #fff;
-            padding: 10px 0;
-            /* Reduzi o tamanho do footer */
-        }
-
-        .footer-logo {
-            font-size: 32px;
-            font-weight: bold;
-        }
-
-        .footer-links {
-            list-style: none;
-            padding: 0;
-            margin-top: 20px;
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-
-        .footer-links a {
-            color: #fff;
-            font-size: 14px;
-            /* Diminuí o tamanho das fontes */
-        }
-
-        /* Animações */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        .animated {
+            background-color: #fff;
+            padding: 40px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             animation: fadeIn 1s ease-in-out;
         }
 
-        /* Estilo para o novo footer */
-        .social-icons {
-            margin-top: 20px;
-            text-align: center;
+        .section-title {
+            font-size: 28px;
+            margin-bottom: 20px;
         }
 
-        .social-icons a {
-            font-size: 24px;
-            margin: 0 10px;
-            color: #ff7043;
+        .tech-icons {
+            font-size: 48px;
+            margin: 10px;
+            color: #00796b;
+            /* Cor personalizável */
         }
 
-        .footer-content {
-            margin-top: 40px;
+        .icon-bg {
+            background-color: #00796b;
+            /* Cor personalizável */
+            border-radius: 50%;
+            padding: 20px;
+            display: inline-block;
         }
 
-        .footer-content h4 {
-            font-size: 24px;
-        }
-
-        .footer-content p {
-            font-size: 16px;
-        }
-
-        /* Estilo para as novas seções de conteúdo */
-        .content-section {
-            background-color: #1e1e1e;
-            padding: 40px 0;
-        }
-
-        .content-section h3 {
-            color: #ff7043;
-        }
-
-        .content-section p {
-            font-size: 18px;
-            line-height: 1.6;
-        }
-
-        /* Estilo para os ícones de serviços */
-        .service-icon {
-            border-radius: 10px;
-            /* Adicionei bordas arredondadas */
-            background-color: #ff7043;
+        .contact-button {
+            background-color: #00796b;
+            /* Cor personalizável */
             color: #fff;
-            padding: 10px;
-            font-size: 24px;
-        }
-
-        /* Estilo para as imagens dos serviços */
-        .service-image {
-            max-width: 100px;
-            /* Defina o tamanho máximo das imagens */
-            border-radius: 10px;
-            /* Adicionei bordas arredondadas */
+            font-size: 20px;
+            border-radius: 5px;
+            animation: bounce 2s infinite;
         }
     </style>
 </head>
 
 <body>
-    <header>
-        <div class="navbar-fixed">
-            <nav class="nav-wrapper" style="background-color: #ff7043;">
-                <div class="container">
-                    <a href="http://localhost:8000/" class="brand-logo white-text">
-                        <i class="material-icons left">library_books</i> Biblioteca Online
-                    </a>
-                    <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li>
-                            <a href="http://localhost:8000/" class="white-text">
-                                <i class="material-icons left">home</i> Início
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://localhost:8000/sobre-nos" class="white-text">
-                                <i class="material-icons left">info</i> Sobre Nós
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#books" class="white-text">
-                                <i class="material-icons left">book</i> Livros
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#contact" class="white-text">
-                                <i class="material-icons left">email</i> Contato
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </header>
+    <!-- Cabeçalho -->
+    @include('includes.header')
 
     <div class="container">
-        <section id="sobre-nos" class="section">
-            <h2 class="white-text animated">Quem Somos</h2>
-            <div class="row animated">
-                <div class="col s12 m6">
-                    <div class="card">
-                        <div class="card-content">
-                            <span class="card-title">Nossa História</span>
-                            <p>Somos uma biblioteca online dedicada a oferecer acesso a uma vasta coleção de livros em
-                                diversos gêneros e idiomas. Nossa missão é tornar o conhecimento e a literatura
-                                acessíveis a todos, em qualquer lugar.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col s12 m6">
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="https://i.postimg.cc/jSwpS15Y/escritorio-moderno-com-ia-generativa-de-computador-portatil.jpg" alt="Imagem da Biblioteca">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <section id="servicos" class="section">
-            <h2 class="white-text animated">Nossos Serviços</h2>
-            <div class="row animated">
-                <div class="col s12 m4">
-                    <div class="icon-block">
-                        <span class="service-icon"><i class="material-icons">search</i></span>
-                        <img src="imagem-servico-1.jpg" alt="Serviço 1" class="service-image">
-                        <p class="light">Consultar Endereço de CEP para Entrega</p>
-                        <form action="{{ route('consultar-cep') }}" method="POST">
-                            @csrf
-                            <input type="text" name="cep" placeholder="Digite o CEP">
-                            <button type="submit" class="btn waves-effect waves-light">Consultar</button>
-                        </form>
-                        <div id="resultado-cep"></div>
-                    </div>
-                </div>
-                <div class="col s12 m4">
-                    <div class="icon-block">
-                        <span class="service-icon"><i class="material-icons">library_books</i></span>
-                        <img src="imagem-servico-2.jpg" alt="Serviço 2" class="service-image">
-                        <p class="light">Busque seus Livros Favoritos</p>
-                    </div>
-                </div>
-                <div class="col s12 m4">
-                    <div class="icon-block">
-                        <span class="service-icon"><i class="material-icons">email</i></span>
-                        <img src="imagem-servico-3.jpg" alt="Serviço 3" class="service-image">
-                        <p class="light">Entre em Contato</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <div class="section">
+            <h2 class="section-title">Sobre Mim</h2>
+            <p>Olá! Sou um desenvolvedor back-end apaixonado por criar sistemas robustos e eficientes. Minha jornada na
+                programação começou na Fatec e se aprofundou na Etec, onde adquiri habilidades práticas em
+                desenvolvimento web e back-end. Atualmente, estou utilizando a API OpenLibrary para obter informações de
+                livros e enriquecer minha mini biblioteca online. Estou sempre em busca de novos desafios e
+                oportunidades para expandir meu conhecimento.</p>
+        </div>
 
-        <!-- Novo conteúdo -->
-        <section class="content-section">
+        <div class="section">
+            <h2 class="section-title">Linguagens e Tecnologias</h2>
             <div class="row">
-                <div class="col s12 m6">
-                    <h3 class="white-text animated">Siga-nos nas Redes Sociais</h3>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook fa-2x"></i></a>
-                        <a href="#"><i class="fab fa-instagram fa-2x"></i></a>
-                        <a href="#"><i class="fab fa-linkedin fa-2x"></i></a>
-                    </div>
+                <div class="col s4 m4">
+                    <img src="https://i.postimg.cc/k4rnwNWT/png-transparent-web-development-application-programming-interface-computer-icons-web-api-others-text.png"
+                        alt="Integração com API" style="width: 100px; height: 100px; ">
+                    <p>Integração com API</p>
                 </div>
-                <div class="col s12 m6">
-                    <h3 class="white-text animated">Entre em Contato</h3>
-                    <p>Fale conosco se tiver alguma dúvida ou comentário:</p>
-                    <p>Email: contato@bibliotecaonline.com</p>
-                    <p>Telefone: (123) 456-7890</p>
+                <div class="col s4 m4">
+                    <img src="https://i.postimg.cc/fLxMP3KD/png-transparent-logo-php-html-others-text-trademark-logo-thumbnail.png"
+                        alt="PHP" style="width: 100px; height: 100px;">
+                    <p>PHP</p>
                 </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- Novo footer -->
-    <footer class="page-footer animated" style="background-color: #ff7043;">
-        <div class="container">
-            <div class="row">
-                <div class="col s12 m6">
-                    <h5 class="white-text footer-logo">Biblioteca Online</h5>
-                    <p>Sua melhor fonte para livros online.</p>
-                </div>
-                <div class="col s12 m6 footer-content">
-                    <h4 class="white-text">Destaques</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eget urna vitae orci hendrerit
-                        luctus.</p>
-                    <p>Nulla facilisi. Integer lacinia, justo a fermentum malesuada, velit lectus sodales turpis, eu
-                        finibus justo ligula id mi.</p>
+                <div class="col s4 m4">
+                    <img src="https://i.postimg.cc/WFWBMPPb/1969px-Laravel-svg.png" alt="Laravel"
+                        style="width: 100px; height: 100px; ">
+                    <p>Laravel</p>
                 </div>
             </div>
         </div>
-    </footer>
 
+
+
+
+        <div class="section">
+            <h2 class="section-title">Experiência Profissional</h2>
+            <p>Com experiência no desenvolvimento back-end desde 2020, tenho conhecimento em linguagens como C, C#, e
+                Laravel, além de habilidades em SQL para gerenciamento de bancos de dados. Também possuo experiência em
+                VBA. Durante minha trajetória, trabalhei em equipes multidisciplinares, onde criei soluções eficazes que
+                atendem às necessidades dos clientes e usuários finais. Minha paixão pela programação impulsiona meu
+                desejo contínuo de aprender e aprimorar minhas habilidades para criar produtos de alta qualidade.</p>
+        </div>
+
+
+        <div class="section">
+            <h2 class="section-title">Entre em Contato</h2>
+            <p>Estou sempre pronto para colaborar em projetos emocionantes. Se você deseja entrar em contato ou discutir
+                uma colaboração, sinta-se à vontade para me enviar uma mensagem.</p>
+            <a class="btn contact-button waves-effect waves-light">Contate-me</a>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script>
-        M.AutoInit(); // Inicializa os componentes do Materialize
-    </script>
+
+    <!-- Rodapé -->
+    @include('includes.footer')
+
+    <!-- Botão de alternância do modo noturno (ícone de lua/sol) -->
+    @include('includes.button-mode')
+
 </body>
 
 </html>
