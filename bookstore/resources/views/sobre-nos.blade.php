@@ -4,56 +4,12 @@
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-    <style>
-        body {
-            background-color: #f0f0f0;
-            /* Cor de fundo suave */
-        }
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="{{ asset('css/sobre-nos.css') }}">
 
-        .header {
-            font-size: 36px;
-            margin: 30px 0;
-            animation: fadeInUp 1s ease-in-out;
-        }
-
-        .section {
-            background-color: #fff;
-            padding: 40px;
-            margin: 20px 0;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        .section-title {
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
-
-        .tech-icons {
-            font-size: 48px;
-            margin: 10px;
-            color: #00796b;
-            /* Cor personalizável */
-        }
-
-        .icon-bg {
-            background-color: #00796b;
-            /* Cor personalizável */
-            border-radius: 50%;
-            padding: 20px;
-            display: inline-block;
-        }
-
-        .contact-button {
-            background-color: #00796b;
-            /* Cor personalizável */
-            color: #fff;
-            font-size: 20px;
-            border-radius: 5px;
-            animation: bounce 2s infinite;
-        }
-    </style>
 </head>
 
 <body>
@@ -64,44 +20,71 @@
 
         <div class="section">
             <h2 class="section-title">Sobre Mim</h2>
-            <p>Olá! Sou um desenvolvedor back-end apaixonado por criar sistemas robustos e eficientes. Minha jornada na
-                programação começou na Fatec e se aprofundou na Etec, onde adquiri habilidades práticas em
-                desenvolvimento web e back-end. Atualmente, estou utilizando a API OpenLibrary para obter informações de
-                livros e enriquecer minha mini biblioteca online. Estou sempre em busca de novos desafios e
-                oportunidades para expandir meu conhecimento.</p>
+            <p>Olá! Atualmente, atuo como desenvolvedor Back-End, com mais de dois anos de experiência nesta área
+                dinâmica. Minha trajetória na programação teve início na Fatec e se consolidou na Etec, onde adquiri
+                habilidades práticas em desenvolvimento web e back-end. Ao longo desse tempo, venho aprimorando minha
+                expertise em integrações com APIs, aprimorando minha lógica de programação e buscando constantemente a
+                exploração de novas linguagens e tecnologias.<br><br>
+
+                Com vasta experiência em desenvolvimento Back-End, tenho trabalhado ativamente na criação de sistemas
+                robustos e eficientes. Neste projeto, estou utilizando da API OpenLibrary para enriquecer minha mini
+                biblioteca online, utilizando essas informações para aprimorar ainda mais meu conhecimento.<br><br>
+
+                Estou sempre aberto a novos desafios e oportunidades que me permitam expandir e aperfeiçoar minhas
+                habilidades, sempre buscando maneiras inovadoras de enfrentar os desafios presentes no mundo do
+                desenvolvimento de software.</p>
         </div>
 
         <div class="section">
-            <h2 class="section-title">Linguagens e Tecnologias</h2>
+            <h2 class="section-title">Tecnologias utilizadas nesse projeto</h2>
             <div class="row">
                 <div class="col s4 m4">
-                    <img src="https://i.postimg.cc/k4rnwNWT/png-transparent-web-development-application-programming-interface-computer-icons-web-api-others-text.png"
-                        alt="Integração com API" style="width: 100px; height: 100px; ">
+                    <img src="https://i.postimg.cc/L5g8BLJx/api-318-751021.png" alt="Integração com API">
                     <p>Integração com API</p>
                 </div>
+
                 <div class="col s4 m4">
-                    <img src="https://i.postimg.cc/fLxMP3KD/png-transparent-logo-php-html-others-text-trademark-logo-thumbnail.png"
-                        alt="PHP" style="width: 100px; height: 100px;">
+                    <img src="https://i.postimg.cc/bvGnFDS2/888859.png" alt="Html">
+                    <p>Html</p>
+                </div>
+
+                <div class="col s4 m4">
+                    <img src="https://i.postimg.cc/8sCrSjcW/4846332.png" alt="PHP">
                     <p>PHP</p>
                 </div>
+
                 <div class="col s4 m4">
-                    <img src="https://i.postimg.cc/WFWBMPPb/1969px-Laravel-svg.png" alt="Laravel"
-                        style="width: 100px; height: 100px; ">
+                    <img src="https://i.postimg.cc/zDdJ3dc8/888847.png" alt="Css">
+                    <p>Css</p>
+                </div>
+
+
+                <div class="col s4 m4">
+                    <img src="https://i.postimg.cc/05TR3L6W/gratis-png-javascript-logo-html-comentario-blog-thumbnail-removebg-preview.png"
+                        alt="JavaScript">
+                    <p>JavaScript</p>
+                </div>
+
+
+                <div class="col s4 m4">
+                    <img src="https://i.postimg.cc/WFWBMPPb/1969px-Laravel-svg.png" alt="Laravel">
                     <p>Laravel</p>
                 </div>
             </div>
         </div>
 
-
-
-
         <div class="section">
             <h2 class="section-title">Experiência Profissional</h2>
-            <p>Com experiência no desenvolvimento back-end desde 2020, tenho conhecimento em linguagens como C, C#, e
-                Laravel, além de habilidades em SQL para gerenciamento de bancos de dados. Também possuo experiência em
-                VBA. Durante minha trajetória, trabalhei em equipes multidisciplinares, onde criei soluções eficazes que
-                atendem às necessidades dos clientes e usuários finais. Minha paixão pela programação impulsiona meu
-                desejo contínuo de aprender e aprimorar minhas habilidades para criar produtos de alta qualidade.</p>
+            <p>Com mais de dois anos de experiência em PHP, com foco especializado em Laravel, tenho habilidades sólidas
+                no desenvolvimento back-end. Além disso, possuo conhecimentos em programação para Arduino, ampliando meu
+                leque de habilidades para além do desenvolvimento de software convencional. Estou atualmente buscando
+                aprimorar meu conhecimento e habilidades para minha pós-graduação, visando fortalecer ainda mais meu
+                perfil profissional.<br><br>
+                Essa busca contínua por aprendizado reflete minha paixão pela programação e meu compromisso em criar
+                soluções de alta qualidade para atender às demandas dos clientes e usuários finais.<br><br>
+                Ao longo da minha trajetória, trabalhei em equipes multidisciplinares, oferecendo soluções eficazes e
+                inovadoras. Minha experiência também abrange o gerenciamento de bancos de dados utilizando SQL e VBA,
+                permitindo-me desenvolver produtos que atendem às necessidades do mercado.</p>
         </div>
 
 
@@ -109,7 +92,8 @@
             <h2 class="section-title">Entre em Contato</h2>
             <p>Estou sempre pronto para colaborar em projetos emocionantes. Se você deseja entrar em contato ou discutir
                 uma colaboração, sinta-se à vontade para me enviar uma mensagem.</p>
-            <a class="btn contact-button waves-effect waves-light">Contate-me</a>
+            <a href="https://www.linkedin.com/in/luis-inacio-0849b0227/"
+                class="btn contact-button waves-effect waves-light" target="_blank">Conecte-se comigo no LinkedIn</a>
         </div>
     </div>
 

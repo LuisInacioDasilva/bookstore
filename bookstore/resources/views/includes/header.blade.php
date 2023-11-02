@@ -9,7 +9,7 @@
                 </a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li><a href="http://localhost:8000/">Início</a></li>
-                    <li><a href="http://localhost:8000/sobre-nos">Sobre Nós</a></li>
+                    <li><a href="http://localhost:8000/sobre-nos">Sobre Mim</a></li>
                     <li><a href="#books">Livros</a></li>
                     <li class="dark-mode-link">
                         <a href="#contact">Contato</a>
