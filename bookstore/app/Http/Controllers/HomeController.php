@@ -6,6 +6,11 @@ namespace App\Http\Controllers;
 use App\Models\Entradas\BuscaLivroE;
 use App\Models\Services\BuscaLivroService;
 
+
+use App\Models\Entradas\ListarLivroE;
+use App\Models\Services\ListarLivrosService;
+
+
 use App\Models\Services\ConsultaLivrosService;
 use Illuminate\Http\Request;
 
@@ -32,6 +37,22 @@ class HomeController extends Controller
         try {
 
             $processador = new BuscaLivroService(new BuscaLivroE($request));
+            $processador->Processar();
+            $dados = $processador->saida;
+
+            return view('info-livro', compact('dados'));
+         } catch (\Exception $ex) {
+             return $ex;
+         }
+    }
+
+
+    public function getListarLivros(Request $request)
+    {
+
+        try {
+
+            $processador = new ListarLivrosService(new ListarLivroE($request));
             $processador->Processar();
             $dados = $processador->saida;
 

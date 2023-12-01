@@ -19,5 +19,6 @@ Route::get('/', 'HomeController@ListaLivrosHome')->name('home');
 
 Route::get('/busca-livro/{id_livro}', 'HomeController@getBuscaLivro')->name('busca-livro');
 
-
 Route::get('/sobre-nos', function () { return view('sobre-nos');})->name('sobre-nos');
+
+Route::get('/books', 'HomeController@getListarLivros')->name('books');

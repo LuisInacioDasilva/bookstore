@@ -2,12 +2,12 @@
 
 namespace App\Models\Services;
 
-use App\Models\Entradas\BuscaLivroE;
-use App\Models\Saidas\BuscaLivroS;
+use App\Models\Entradas\ListarLivroE;
+use App\Models\Saidas\ListaLivrosS;
 use Illuminate\Database\Eloquent\Model;
 use GuzzleHttp\Client;
 
-class BuscaLivroService extends Model
+class ListarLivrosService extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -20,7 +20,7 @@ class BuscaLivroService extends Model
     ];
 
 
-    public function __construct(BuscaLivroE $entrada)
+    public function __construct(ListarLivroE $entrada)
     {
         $this->entrada = $entrada;
     }
@@ -36,11 +36,10 @@ class BuscaLivroService extends Model
 
         $data = json_decode($response->getBody());
 
-         $dados = new BuscaLivroS($data);
+         $dados = new ListaLivrosS($data);
 
         $this->saida = $dados;
 
 
     }
 }
-
