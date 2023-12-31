@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Entradas\BuscaCategoriaLivrosE;
 use App\Models\Entradas\BuscaLivroE;
+use App\Models\Services\BuscaCategoriaLivrosService;
 use App\Models\Services\BuscaLivroService;
+use App\Models\Services\ListarCategoriasService;
 
-
-use App\Models\Entradas\ListarLivroE;
-use App\Models\Services\ListarLivrosService;
 
 
 use App\Models\Services\ConsultaLivrosService;
@@ -26,7 +26,7 @@ class HomeController extends Controller
 
             return view('home', compact('dados'));
         } catch (\Exception $ex) {
-            return $this->retornarExceptionGenetica($ex);
+            return $ex;
         }
     }
 
@@ -41,24 +41,23 @@ class HomeController extends Controller
             $dados = $processador->saida;
 
             return view('info-livro', compact('dados'));
-         } catch (\Exception $ex) {
-             return $ex;
-         }
+        } catch (\Exception $ex) {
+            return $ex;
+        }
     }
 
-
-    public function getListarLivros(Request $request)
+    public function postBuscaCategoria(Request $request)
     {
 
         try {
 
-            $processador = new ListarLivrosService(new ListarLivroE($request));
+            $processador = new BuscaCategoriaLivrosService(new BuscaCategoriaLivrosE($request));
             $processador->Processar();
-            $dados = $processador->saida;
+            return $processador->saida;
 
-            return view('info-livro', compact('dados'));
-         } catch (\Exception $ex) {
-             return $ex;
-         }
+
+        } catch (\Exception $ex) {
+            return $ex;
+        }
     }
 }

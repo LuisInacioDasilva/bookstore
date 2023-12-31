@@ -2,10 +2,12 @@
 
 namespace App\Models\Services;
 
+use App\Models\Entradas\BuscaCategoriaLivrosE;
 use App\Models\Saidas\ConsultaLivrosS;
 use Illuminate\Database\Eloquent\Model;
 use GuzzleHttp\Client;
-class ConsultaLivrosService extends Model
+
+class BuscaCategoriaLivrosService extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -17,11 +19,11 @@ class ConsultaLivrosService extends Model
         "saida"
     ];
 
-   public function __construct()
+
+    public function __construct(BuscaCategoriaLivrosE $entrada)
     {
-
+        $this->entrada = $entrada;
     }
-
 
     public function Processar()
     {
@@ -46,6 +48,5 @@ class ConsultaLivrosService extends Model
         }
 
          $this->saida = $lista;
-
     }
 }
