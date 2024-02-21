@@ -27,7 +27,7 @@ class ConsultaLivrosService extends Model
     {
 
 
-        $categories = ['romance', 'terror'];
+        $categories = ['romance'];
         $lista = [];
 
         $client = new Client();

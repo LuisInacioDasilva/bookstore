@@ -22,9 +22,10 @@
 
     <!-- Seção de apresentação -->
     <section id="presentation" class="center-align py-5" data-aos="fade-up">
-        <h2 class="flow-text">Bem-vindo à Minha Livraria Online!</h2>
-        <p class="flow-text">Explore nossa coleção de livros e mergulhe em aventuras literárias incríveis. Encontre o
-            próximo livro que irá cativar sua imaginação.</p>
+        <div class="container">
+            <h2 class="flow-text">Bem-vindo à Minha Livraria Online!</h2>
+            <p class="flow-text">Explore nossa coleção de livros e mergulhe em aventuras literárias incríveis. Encontre o próximo livro que irá cativar sua imaginação.</p>
+        </div>
     </section>
 
     <!-- Seção de livros em destaque -->
@@ -33,7 +34,10 @@
             <h2 class="center-align section-title">Livros em Destaque</h2>
 
             <!-- Catálogo de Livros em Destaque -->
-            <div class="row" {{ shuffle($dados) }}>
+            <div class="row">
+                @php
+                    $count = 0;
+                @endphp
                 @foreach ($dados as $item)
                     @if (!empty($item->titulo))
                         <!-- Verifique se o título não está vazio -->
@@ -41,16 +45,19 @@
                             <div class="book-card" data-aos="fade-up">
                                 <a href="http://127.0.0.1:8000/busca-livro/{{ $item->id_livro }}">
                                     <!-- Adicione um link para a página de detalhes do livro -->
-                                    <img src="{{ $item->imagem }}" width="250px" height="315px"
-                                        alt="{{ $item->titulo }}">
+                                    <img src="{{ $item->imagem }}" class="responsive-img" alt="{{ $item->titulo }}">
                                     <h5>{{ $item->titulo }}</h5>
                                 </a>
-                                <p>Autor:
-                                    {{ mb_substr($item->autores, 0, 20) }}{{ strlen($item->autores) > 20 ? '...' : '' }}
-                                </p>
+                                <p>Autor: {{ mb_substr($item->autores, 0, 20) }}{{ strlen($item->autores) > 20 ? '...' : '' }}</p>
                                 <p>Descrição: {{ $item->descricao }}</p>
                             </div>
                         </div>
+                        @php
+                            $count++;
+                            if ($count % 3 == 0) {
+                                echo '</div><div class="row">';
+                            }
+                        @endphp
                     @endif
                 @endforeach
             </div>

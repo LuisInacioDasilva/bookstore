@@ -122,6 +122,8 @@ body.dark-mode {
 #book-info .book-description {
     font-size: 16px;
     color: #333;
+    font-weight: 400;
+
 }
 
 #book-info .book-details p {

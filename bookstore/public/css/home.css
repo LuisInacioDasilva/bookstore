@@ -15,7 +15,6 @@ body.dark-mode {
     /* Texto branco */
 }
 
-
 /* Estilo para os títulos das seções */
 .section-title {
     font-size: 36px;
@@ -30,7 +29,7 @@ body.dark-mode {
     /* Cor de fundo branca para os cards */
     padding: 20px;
     border-radius: 10px;
-    margin: 20px;
+    margin-bottom: 20px;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
@@ -46,10 +45,11 @@ body.dark-mode .book-card {
     transform: translateY(-5px);
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
 }
-
 .book-card img {
     max-width: 100%;
     border-radius: 10px;
+    height: 250px; /* Defina a altura desejada para as imagens */
+    object-fit: cover; /* Garante que a imagem mantenha sua proporção e cubra todo o espaço */
 }
 
 .book-card p {
@@ -68,18 +68,4 @@ body.dark-mode .book-card {
     color: #333;
     margin: 30px 20px;
     animation: fadeIn 2s;
-}
-
-
-/* Estilos responsivos */
-@media (max-width: 992px) {
-
-
-    .book-card {
-        padding: 10px;
-    }
-
-    .section-title {
-        font-size: 28px;
-    }
 }

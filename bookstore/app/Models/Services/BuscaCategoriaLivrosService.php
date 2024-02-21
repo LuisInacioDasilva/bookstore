@@ -29,7 +29,7 @@ class BuscaCategoriaLivrosService extends Model
     {
 
 
-        $categories = ['romance', 'terror'];
+        $categories = [$this->entrada->categoria];
         $lista = [];
 
         $client = new Client();

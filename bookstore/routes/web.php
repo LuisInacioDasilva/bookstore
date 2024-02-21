@@ -23,4 +23,4 @@ Route::get('/sobre-nos', function () { return view('sobre-nos');})->name('sobre-
 
 Route::get('/books', function () { return view('listar-livros');})->name('books');
 
-Route::post('/busca-categoria', 'HomeController@postBuscaCategoria')->name('busca-categoria');
+Route::get('/busca-categoria', 'HomeController@getBuscaCategoria')->name('busca-categoria');

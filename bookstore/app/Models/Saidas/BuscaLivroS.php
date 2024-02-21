@@ -18,23 +18,27 @@ class BuscaLivroS extends Model
         ""
     ];
 
-    public function __construct($saida = null){
-        if($saida == null){return;}
+    public function __construct($saida = null)
+    {
+        if ($saida == null) {
+            return;
+        }
 
 
 
-    $this->titulo = isset($saida->title) ? trim($saida->title) : '';
-    $this->data_publicacao = isset($saida->first_publish_date) ? trim($saida->first_publish_date) : '';
-    $this->autor = $this->BuscaAutor($saida->authors[0]->author->key);
-    $this->assuntos = isset($saida->subjects) ? implode(', ', $saida->subjects) : '';
-    $this->id_livro =  str_replace("/works/", '', $saida->key);
-    $this->imagem   =  $this->BuscaImagemLivro($this->id_livro);
-    $this->descricao_livro =  $this->BuscaDescricaoLivro($this->id_livro);
+        $this->titulo = isset($saida->title) ? trim($saida->title) : '';
+        $this->data_publicacao = isset($saida->first_publish_date) ? trim($saida->first_publish_date) : '';
+        $this->autor = $this->BuscaAutor($saida->authors[0]->author->key);
+        $this->assuntos = isset($saida->subjects) ? implode(', ', $saida->subjects) : '';
+        $this->id_livro = str_replace("/works/", '', $saida->key);
+        $this->imagem = $this->BuscaImagemLivro($this->id_livro);
+        $this->descricao_livro = $this->BuscaDescricaoLivro($this->id_livro);
 
 
     }
 
-    private function BuscaAutor($id_autor){
+    private function BuscaAutor($id_autor)
+    {
         $client = new Client();
 
         try {
@@ -48,7 +52,8 @@ class BuscaLivroS extends Model
         }
     }
 
-    private function BuscaImagemLivro($id_livro){
+    private function BuscaImagemLivro($id_livro)
+    {
         $client = new Client();
 
         try {
@@ -68,15 +73,16 @@ class BuscaLivroS extends Model
         }
     }
 
-    private function BuscaDescricaoLivro($id_livro){
+    private function BuscaDescricaoLivro($id_livro)
+    {
         $client = new Client();
 
         try {
             $response = $client->get("https://openlibrary.org/works/{$id_livro}.json");
             $livro_data = json_decode($response->getBody());
 
-            if (isset($livro_data->description)) {
-                return $livro_data->description;
+            if (isset($livro_data->description) && isset($livro_data->description->value)) {
+                return $livro_data->description->value;
             } else {
                 return 'Descrição Indisponível';
             }
