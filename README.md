@@ -1,16 +1,33 @@
-# bookstore
+<p align="center"><img src="assets/hero.svg" alt="Bookstore Discovery — acervo em movimento" width="100%"></p>
 
-Catálogo de livros iniciado em 2023. Consulta dados da [Open Library](https://openlibrary.org/developers/api) e apresenta listagens e detalhes em Laravel. Esta etapa atualiza a base técnica; a revisão do produto e da interface vem em uma mudança separada.
+# Bookstore Discovery
 
-## Estado da revisão
+Um catálogo para encontrar a próxima leitura, sem fingir que é uma loja. Busco metadados públicos na Open Library, normalizo as respostas na aplicação e entrego uma interface própria, responsiva e acessível. O projeto começou em 2023 como um estudo de catálogo; esta versão mantém a ideia original e a transforma em uma aplicação apresentável, testada e mais preparada para falhas da fonte externa.
 
-O histórico mostra a integração inicial no commit `fe6615c` e a tela de detalhes no `d0f4aa0`. A exceção devolvida diretamente ao navegador entrou em `7e7a02b`; o mapeamento atual de título, autores, capa e ID foi alterado em `5e817c3`. Não encontrei no histórico uma justificativa para expor exceções ou fazer chamadas externas sem limite de tempo.
+**Experimente:** clone, rode localmente e abra `/`. Busque por título, autor ou assunto; filtre por tema e abra a ficha de uma obra. Não é necessário cadastrar conta nem configurar banco de dados.
 
-A integração entrou em 2023 e a PR #2 impôs timeout às requisições, validou o identificador, evitou consultas repetidas para capa/descrição e ocultou exceções cruas. Esta PR migra Laravel 9 para 13, Sanctum 3 para 4, Tinker 2 para 3 e PHPUnit 9 para 12, mantendo a estrutura do aplicativo e os dez testes de caracterização. Ainda faltam cache, tratamento explícito de indisponibilidade e uma revisão mais ampla da experiência; não trate esta etapa isolada como homologação de produção.
+## O que está implementado
 
-## Executar localmente
+- Busca com filtros e paginação; fichas com descrição, assuntos, capa e acesso à fonte original.
+- Gateway HTTP com tempo limite, retry seletivo, cache de seis horas e última resposta válida por dois dias. Quando a fonte falha, uma consulta já conhecida continua acessível com aviso visual; sem cache, a aplicação retorna 503 sem vazar detalhes internos.
+- IDs da Open Library validados antes da chamada externa, consultas limitadas e respostas filtradas antes da renderização.
+- Layout responsivo com navegação por teclado, foco visível e animações desativadas quando o sistema pede menos movimento.
+- Rotas legadas preservadas, com redirecionamento para a experiência nova onde cabível. O código legado também foi mantido para facilitar a comparação e o rollback.
+- Testes de caracterização do comportamento anterior e testes novos para busca, cache, falha da fonte, HTML escapado e rotas.
 
-Requisitos: PHP 8.3+, Composer, extensões exigidas pelo `composer.lock` e acesso à Open Library. Dentro de `bookstore/`:
+## Arquitetura
+
+```text
+Browser → CatalogController → OpenLibraryCatalog → Open Library
+                              │
+                              └─ cache + última resposta válida
+```
+
+O controller cuida de validação e apresentação; o gateway concentra contrato externo, normalização e resiliência. Não há persistência de livros local nem carrinho: isso exigiria outra licença de dados, regras de atualização e um produto diferente.
+
+## Rodar localmente
+
+Requer **PHP 8.3+**, Composer 2 e as extensões padrão exigidas pelo Laravel. Na raiz do repositório:
 
 ```bash
 composer install
@@ -19,24 +36,23 @@ php artisan key:generate
 php artisan serve
 ```
 
-No PowerShell, use `Copy-Item .env.example .env` no lugar de `cp`. Mantenha `APP_DEBUG=false` se compartilhar a instância na rede. A página principal faz consulta externa em tempo real; uma falha de rede pode interromper a renderização. Não há migração de banco de dados necessária para o catálogo atual.
+Abra `http://127.0.0.1:8000`. No Windows, copie `.env.example` para `.env` pelo Explorador ou use `Copy-Item .env.example .env` no PowerShell.
 
-`OPEN_LIBRARY_BASE_URL` aponta para a API pública. O antigo `BASE_URL` ainda é aceito como fallback para não quebrar ambientes existentes. Em caso de indisponibilidade da API, o site devolve HTTP 503 e registra o erro no log em vez de mostrar a exceção ao visitante.
-
-## Verificação
+Opcionalmente, defina `OPEN_LIBRARY_CONTACT_EMAIL` no `.env` para identificar o aplicativo no `User-Agent`. Use um e-mail seu, não um valor fixo em código. A interface não depende de build JavaScript.
 
 ```bash
-cd bookstore
 php artisan test
+composer validate --strict
 ```
 
-Os testes de caracterização fixam o mapeamento do cartão e a normalização do identificador. A suíte adicional cobre os links, a data, os campos opcionais do detalhe, a chamada de autor e os erros de API. Ela **não** cobre todos os fluxos nem certifica segurança. O CI executa a suíte com PHP 8.3 a cada PR.
+Os testes HTTP simulam a Open Library e, portanto, não dependem de conexão externa. A origem real pode oscilar ou limitar acesso; para uso público de alto volume seria necessário respeitar as [diretrizes da API](https://openlibrary.org/developers/api) e acordar uma estratégia de dados apropriada.
 
 ## Publicação e rollback
 
-O deploy desta etapa requer PHP 8.3+, `composer install --no-dev`, `.env` com `APP_KEY`/`APP_DEBUG=false` e `php artisan config:cache`; não há schema novo. A mudança não altera as configurações antigas de sessão nem os dados. Para voltar, reverta a PR, instale as dependências do `composer.lock` anterior, limpe o cache com `php artisan config:clear` e restaure o runtime PHP anterior se necessário. Nenhuma migração de dados é executada.
+Configure PHP 8.3+, `APP_KEY`, `APP_ENV=production`, `APP_DEBUG=false`, HTTPS e cache persistente (`CACHE_STORE=file` em uma instância ou Redis em múltiplas instâncias) no destino. Execute `composer install --no-dev --prefer-dist --optimize-autoloader`, configure o ambiente e publique o conteúdo de `public/` pelo servidor web. Não exponha `.env` ou a raiz do projeto.
+
+Não há migração de schema nesta versão. Para voltar ao comportamento anterior, reverta o commit da experiência nova e faça novo deploy; o código e as views antigas continuam no repositório. O upgrade de framework para Laravel 13 foi separado em uma PR anterior, justamente para isolar esse risco.
 
 ---
 
-<p align="center"><a href="https://github.com/LuisInacioDasilva"><img src="https://avatars.githubusercontent.com/u/88007376?v=4" width="82" height="82" alt="Foto de Luis da Silva"></a></p>
-<p align="center"><strong>Desenvolvido por Luis da Silva</strong><br>Back-end, dados, integrações e automação.</p>
+<p align="center"><img src="https://github.com/LuisInacioDasilva.png?size=72" alt="Foto de Luis da Silva" width="72" height="72"><br><strong>Luis da Silva</strong><br>Back-end, integrações e produtos que precisam funcionar além da demo.</p>
