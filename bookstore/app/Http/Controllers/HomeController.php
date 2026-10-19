@@ -25,8 +25,9 @@ class HomeController extends Controller
             $dados = $processador->saida;
 
             return view('home', compact('dados'));
-        } catch (\Exception $ex) {
-            return $ex;
+        } catch (\Throwable $ex) {
+            report($ex);
+            abort(503, 'Catálogo temporariamente indisponível.');
         }
     }
 
@@ -41,8 +42,9 @@ class HomeController extends Controller
             $dados = $processador->saida;
 
             return view('info-livro', compact('dados'));
-        } catch (\Exception $ex) {
-            return $ex;
+        } catch (\Throwable $ex) {
+            report($ex);
+            abort(503, 'Catálogo temporariamente indisponível.');
         }
     }
 
@@ -56,8 +58,9 @@ class HomeController extends Controller
             return $processador->saida;
 
 
-        } catch (\Exception $ex) {
-            return $ex;
+        } catch (\Throwable $ex) {
+            report($ex);
+            abort(503, 'Catálogo temporariamente indisponível.');
         }
     }
 }
