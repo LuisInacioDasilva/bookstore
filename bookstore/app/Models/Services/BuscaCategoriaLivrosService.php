@@ -32,15 +32,16 @@ class BuscaCategoriaLivrosService extends Model
         $categories = [$this->entrada->categoria];
         $lista = [];
 
-        $client = new Client();
+        $client = new Client(['connect_timeout' => 2, 'timeout' => 5]);
 
         foreach ($categories as $category) {
             $query = urlencode("subject:\"$category\"");
-            $response = $client->get(env('BASE_URL')."/search.json?q={$query}");
+            $baseUrl = rtrim(config('services.open_library.base_url'), '/');
+            $response = $client->get("{$baseUrl}/search.json?q={$query}");
 
             $data = json_decode($response->getBody());
 
-            foreach ($data->docs as $book) {
+            foreach (is_array($data->docs ?? null) ? $data->docs : [] as $book) {
                 if (isset($book->cover_i) && $book->cover_i !== null) {
                     $lista[] = new ConsultaLivrosS($book);
                 }

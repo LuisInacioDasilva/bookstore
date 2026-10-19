@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@ListaLivrosHome')->name('home');
 
-Route::get('/busca-livro/{id_livro}', 'HomeController@getBuscaLivro')->name('busca-livro');
+Route::get('/busca-livro/{id_livro}', 'HomeController@getBuscaLivro')->where('id_livro', 'OL[0-9]+W')->name('busca-livro');
 
 Route::get('/sobre-nos', function () { return view('sobre-nos');})->name('sobre-nos');
 

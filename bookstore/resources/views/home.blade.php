@@ -43,7 +43,7 @@
                         <!-- Verifique se o título não está vazio -->
                         <div class="col s12 m4">
                             <div class="book-card" data-aos="fade-up">
-                                <a href="http://127.0.0.1:8000/busca-livro/{{ $item->id_livro }}">
+                                <a href="{{ route('busca-livro', $item->id_livro) }}">
                                     <!-- Adicione um link para a página de detalhes do livro -->
                                     <img src="{{ $item->imagem }}" class="responsive-img" alt="{{ $item->titulo }}">
                                     <h5>{{ $item->titulo }}</h5>

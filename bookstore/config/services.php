@@ -31,4 +31,8 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'open_library' => [
+        'base_url' => env('OPEN_LIBRARY_BASE_URL', env('BASE_URL', 'https://openlibrary.org')),
+    ],
+
 ];

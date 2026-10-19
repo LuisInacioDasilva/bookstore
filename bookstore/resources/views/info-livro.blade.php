@@ -39,7 +39,7 @@
                         {{ isset($dados->descricao_livro) ? (strlen($dados->descricao_livro) > 150 ? substr($dados->descricao_livro, 0, 145) . '...' : $dados->descricao_livro) : 'Descrição Indisponível' }}
                     </p>
                     <p><strong>Data de Publicação:</strong>
-                        {{ isset($dados->data_publicacao) ? 'Sem informações de data' : $dados->data_publicacao }}</p>
+                        {{ !empty($dados->data_publicacao) ? $dados->data_publicacao : 'Sem informações de data' }}</p>
                     <p><strong>Categorias:</strong>
                         {{ strlen($dados->assuntos) > 158 ? substr($dados->assuntos, 0, 145) . '...' : $dados->assuntos }}
                     </p>

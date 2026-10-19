@@ -2,93 +2,56 @@
 
 namespace App\Models\Saidas;
 
-use Illuminate\Database\Eloquent\Model;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Database\Eloquent\Model;
 
 class BuscaLivroS extends Model
 {
+    protected $fillable = [];
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        ""
-    ];
-
-    public function __construct($saida = null)
+    public function __construct($saida = null, ?ClientInterface $client = null)
     {
-        if ($saida == null) {
+        if ($saida === null) {
             return;
         }
 
+        $this->titulo = is_string($saida->title ?? null) ? trim($saida->title) : '';
+        $this->data_publicacao = is_string($saida->first_publish_date ?? null)
+            ? trim($saida->first_publish_date) : '';
+        $this->assuntos = is_array($saida->subjects ?? null)
+            ? implode(', ', array_filter($saida->subjects, 'is_string')) : '';
+        $this->id_livro = preg_replace('#^/works/#', '', (string) ($saida->key ?? ''));
 
+        $cover = $saida->covers[0] ?? null;
+        $this->imagem = is_int($cover) && $cover > 0
+            ? "https://covers.openlibrary.org/b/id/{$cover}-L.jpg"
+            : 'URL da Imagem Indisponível';
 
-        $this->titulo = isset($saida->title) ? trim($saida->title) : '';
-        $this->data_publicacao = isset($saida->first_publish_date) ? trim($saida->first_publish_date) : '';
-        $this->autor = $this->BuscaAutor($saida->authors[0]->author->key);
-        $this->assuntos = isset($saida->subjects) ? implode(', ', $saida->subjects) : '';
-        $this->id_livro = str_replace("/works/", '', $saida->key);
-        $this->imagem = $this->BuscaImagemLivro($this->id_livro);
-        $this->descricao_livro = $this->BuscaDescricaoLivro($this->id_livro);
+        $description = $saida->description ?? null;
+        $this->descricao_livro = is_string($description)
+            ? $description
+            : (is_string($description->value ?? null) ? $description->value : 'Descrição Indisponível');
 
-
+        $this->autor = $this->BuscaAutor($saida->authors[0]->author->key ?? null, $client);
     }
 
-    private function BuscaAutor($id_autor)
+    private function BuscaAutor($key, ?ClientInterface $client): string
     {
-        $client = new Client();
-
-        try {
-            $response = $client->get("https://openlibrary.org/authors/{$id_autor}.json");
-            $autor_data = json_decode($response->getBody());
-
-            return isset($autor_data->name) ? $autor_data->name : 'Autor Desconhecido';
-        } catch (ClientException $e) {
-            // Trate o erro, por exemplo, retornando 'Autor Desconhecido' em caso de erro
+        if (!is_string($key) || !preg_match('#^/authors/(OL[0-9]+A)$#', $key, $match)) {
             return 'Autor Desconhecido';
         }
-    }
 
-    private function BuscaImagemLivro($id_livro)
-    {
-        $client = new Client();
+        $client = $client ?? new Client(['connect_timeout' => 2, 'timeout' => 5]);
 
         try {
-            $response = $client->get("https://openlibrary.org/works/{$id_livro}.json");
-            $livro_data = json_decode($response->getBody());
+            $response = $client->request('GET', "https://openlibrary.org/authors/{$match[1]}.json");
+            $author = json_decode((string) $response->getBody());
 
-            if (isset($livro_data->covers[0])) {
-                // A URL da capa do livro pode ser construída a partir do cover ID
-                $coverId = $livro_data->covers[0];
-                $imagem_url = "https://covers.openlibrary.org/b/id/{$coverId}-L.jpg";
-                return $imagem_url;
-            } else {
-                return 'URL da Imagem Indisponível';
-            }
-        } catch (ClientException $e) {
-            return 'URL da Imagem Indisponível';
-        }
-    }
-
-    private function BuscaDescricaoLivro($id_livro)
-    {
-        $client = new Client();
-
-        try {
-            $response = $client->get("https://openlibrary.org/works/{$id_livro}.json");
-            $livro_data = json_decode($response->getBody());
-
-            if (isset($livro_data->description) && isset($livro_data->description->value)) {
-                return $livro_data->description->value;
-            } else {
-                return 'Descrição Indisponível';
-            }
-        } catch (ClientException $e) {
-            // Trate o erro, por exemplo, retornando 'Descrição Indisponível' em caso de erro
-            return 'Descrição Indisponível';
+            return is_string($author->name ?? null) ? $author->name : 'Autor Desconhecido';
+        } catch (GuzzleException $exception) {
+            return 'Autor Desconhecido';
         }
     }
 }
